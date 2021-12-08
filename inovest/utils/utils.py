@@ -12,7 +12,7 @@ def make_request(url, params):
 
 
 def get_api_key():
-    with open('./api_key.txt') as f:
+    with open('./apikey.txt') as f:
         key = f.read()
     return key
 

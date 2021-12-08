@@ -69,6 +69,9 @@ db.sqlite3-journal
 instance/
 .webassets-cache
 
+# mac
+.DS_store
+
 # Scrapy stuff:
 .scrapy
 
@@ -128,4 +131,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-.DS_Store
+# apikey
+.apikey.txt
