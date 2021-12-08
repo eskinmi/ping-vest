@@ -1,5 +1,4 @@
 from .utils.helpers import *
-from .utils import stats
 import numpy as np
 from typing import Dict, Tuple
 import datetime as dt
@@ -66,11 +65,7 @@ class StockExchange(AlphaVantageCollector):
             np.array
         """
         self.raw = _data_to_numpy(self.data, self.data_key)
-        return stats.standardize(
-            stats.fod(
-                self.raw
-            )
-        )
+        return self.raw
 
 
 class ForeignExchange(AlphaVantageCollector):
@@ -118,11 +113,7 @@ class ForeignExchange(AlphaVantageCollector):
             np.array
         """
         self.raw = _data_to_numpy(self.data, self.data_key)
-        return stats.standardize(
-            stats.fod(
-                self.raw
-            )
-        )
+        return self.raw
 
 
 def interval_str_to_int(interval):
