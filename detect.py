@@ -1,4 +1,4 @@
-from inovest.pipe import *
+from pingvest.pipe import *
 
 
 def serve_unit(topic, query, interval):
