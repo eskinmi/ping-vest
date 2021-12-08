@@ -9,7 +9,7 @@ class NaiveDetector:
 
     def detect(self):
         return stats.outliers(
-            self.collector.process()
+            self.collector.process(), 3
         )
 
 
