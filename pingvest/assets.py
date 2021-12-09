@@ -4,7 +4,7 @@ from typing import Dict, Tuple
 import datetime as dt
 
 
-class AlphaVantageCollector:
+class AssetCollector:
 
     def __init__(self, params: Dict[str, str]):
         self.api_key = get_api_key()
@@ -35,7 +35,7 @@ class AlphaVantageCollector:
             json.dump(data, f)
 
 
-class StockExchange(AlphaVantageCollector):
+class StockExchange(AssetCollector):
     """
     Collect stock exchange equity prices.
     Example usage:
@@ -68,7 +68,7 @@ class StockExchange(AlphaVantageCollector):
         return self.raw
 
 
-class ForeignExchange(AlphaVantageCollector):
+class ForeignExchange(AssetCollector):
     """
     Foreign exchange equity prices.
     Example usage:
@@ -125,3 +125,12 @@ def _data_to_numpy(data, key):
         [v.get('4. close', 0) for k, v in data[key].items()],
         dtype=np.float64
     )
+
+
+def make(asset, query, interval):
+    if asset == 'stock':
+        return StockExchange(query=query, interval=interval)
+    elif asset == 'forex':
+        return ForeignExchange(query=query, interval=interval)
+    else:
+        raise ValueError('asset should be one of the following; stock, forex')
