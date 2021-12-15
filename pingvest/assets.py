@@ -2,19 +2,39 @@ from .utils.helpers import *
 import numpy as np
 from typing import Dict, Tuple
 import datetime as dt
+import csv
+import pandas as pd
 
 
 class AssetCollector:
 
-    def __init__(self, params: Dict[str, str]):
+    def __init__(self, params: Dict[str, str], parse_type='json'):
         self.api_key = get_api_key()
         self.save_loc = './data.json'
         self.api_path = 'https://www.alphavantage.co/query?'
+        self.parse_type = parse_type
         self.params = {**params, 'apikey': self.api_key}
         self.data = None
 
+    @property
+    def parse_type(self):
+        return self._parse_type
+
+    @parse_type.setter
+    def parse_type(self, value):
+        can_be = ['json', 'csv']
+        if value in can_be:
+            self._parse_type = value
+        else:
+            raise ValueError(F'parse type can be one of the following : {can_be}')
+
     def get(self):
-        self.data = make_request(self.api_path, self.params)
+        if self.parse_type == 'json':
+            self.data = make_request_to_json(self.api_path, self.params)
+        elif self.parse_type == 'csv':
+            self.data = make_request_to_csv(self.api_path, self.params)
+        else:
+            pass
 
     @property
     def data_key(self):
@@ -56,7 +76,7 @@ class StockExchange(AssetCollector):
             'interval': self.interval
         }
 
-        super().__init__(params)
+        super().__init__(params, 'json')
 
     def process(self) -> np.array:
         """
@@ -66,6 +86,48 @@ class StockExchange(AssetCollector):
         """
         self.raw = _data_to_numpy(self.data, self.data_key)
         return self.raw
+
+
+class StockExchangeExtended(AssetCollector):
+    """
+    Collect stock exchange equity prices.
+    Example usage:
+         exc = StockExchange('IBM', '15min')
+         exc.get()
+         series = exc.process()
+    """
+
+    def __init__(self, query, interval, for_slice):
+        self.query = query
+        self.interval = interval
+        self.slice = for_slice
+        self.series = None
+        self.raw = None
+
+        params = {
+            'function': 'TIME_SERIES_INTRADAY_EXTENDED',
+            'symbol': self.query,
+            'interval': self.interval,
+            'slice': self.slice
+        }
+
+        super().__init__(params, 'csv')
+
+    def process(self) -> np.array:
+        """
+        Process raw json.
+        :return:
+            np.array
+        """
+        cr = csv.reader(self.data.splitlines(), delimiter=',')
+        arr = list(cr)
+        df = pd.DataFrame(arr)
+        headers = df.iloc[0]
+        df = df[1:]
+        df.columns = headers
+        df_open = df[['time', 'close']]
+        self.series = df_open
+        return df_open
 
 
 class ForeignExchange(AssetCollector):
@@ -91,7 +153,7 @@ class ForeignExchange(AssetCollector):
             'interval': self.interval
         }
 
-        super().__init__(params)
+        super().__init__(params, 'json')
 
     @staticmethod
     def _query_to_curs(query:str) -> Tuple[str]:

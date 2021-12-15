@@ -3,10 +3,18 @@ import json
 import os
 
 
-def make_request(url, params):
+def make_request_to_json(url, params):
     r = requests.get(url, params)
     if r.status_code == 200:
         return r.json()
+    else:
+        r.raise_for_status()
+
+
+def make_request_to_csv(url, params):
+    r = requests.get(url, params)
+    if r.status_code == 200:
+        return r.content.decode('utf-8')
     else:
         r.raise_for_status()
 
