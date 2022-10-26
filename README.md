@@ -18,11 +18,12 @@ python cli.py --asset forex --query EUR-TRY --strategy naive --interval 60min
 ```
 
 Console:
+
 ```py
-from pingvest.assets import *
-from pingvest.detector import *
+from pingvest.api.assets import *
+from pingvest.detection import *
 
 det = NaiveDetector()
-exc = ForeignExchange('EUR-TRY', '30min')
+exc = ForeignExchangeIntraDay('EUR-TRY', '30min')
 alerts = det.detect(exc)
 ```
