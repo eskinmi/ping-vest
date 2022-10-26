@@ -68,6 +68,8 @@ For a specific detector:
 ```py
 from pingvest.detection.strategy.peakdip import peak_detector
 
+asset = ...
+
 peak_detector(
     asset.data,
     asset.data_keys,
