@@ -1,7 +1,7 @@
 # pingvest
 
 PingVest is an application for users who would like to get notified about the stocks and forex that they have interest in.
-It implements multiple strategies to detect the type of strategy user needs to get nofified, e.g.:
+It implements multiple strategies to detect the type of strategy user needs to get notified, e.g.:
 * price hit
 * trend anomaly
 * dip / peak prices
@@ -16,7 +16,8 @@ There are two main assets; forex and stock. In order to run the app one can take
 * get your alphavantage api key
 * save the api key to the root directory, with name: `alphavantage_apikey.txt`
 * add your run configurations on `app_config.json` file.
-* run
+* install poetry: `pip install poetry` 
+* install dependencies: `poetry install`
 
 To run the app:
 
@@ -26,6 +27,12 @@ Running with given configurations in `app_config.json`:
 
 ```cli
 python app.py 
+```
+
+Or if you haven't installed the dependencies yet:
+
+```cli
+poetry run python app.py
 ```
 
 ## modules
@@ -94,7 +101,7 @@ response = peak_detector(
     quant=0.05
 )
 
-response.message
+msg = response.message
 
 save_response_to_txt(response, './responses.txt')
 ```

@@ -132,7 +132,7 @@ dmypy.json
 .pyre/
 
 # apikey
-.apikey.txt
+.alphavantage_apikey.txt
 
 # output files
 .out.json

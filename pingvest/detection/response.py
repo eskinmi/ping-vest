@@ -2,7 +2,7 @@ import datetime as dt
 from typing import List
 
 
-NEGATIVE_MESSAGE_TEMPLATE = """
+NEGATIVE_COMMON_MESSAGE_TEMPLATE = """
 *PingVest Detection*
 --------------------
 
@@ -13,7 +13,7 @@ SYMBOL: {sym}
 """
 
 
-POSITIVE_MESSAGE_TEMPLATE = """
+POSITIVE_COMMON_MESSAGE_TEMPLATE = """
 *PingVest Detection*
 --------------------
             
@@ -39,12 +39,12 @@ class DetectionResponse:
         self.prices = prices
         self.timestamps = timestamps
         if not self.rb:
-            self.message = NEGATIVE_MESSAGE_TEMPLATE.format(
+            self.message = NEGATIVE_COMMON_MESSAGE_TEMPLATE.format(
                 sym=self.sym,
                 detector_name=' '.join(i.upper() for i in self.strategy.split('-')),
             )
         else:
-            self.message = POSITIVE_MESSAGE_TEMPLATE.format(
+            self.message = POSITIVE_COMMON_MESSAGE_TEMPLATE.format(
                 sym=self.sym,
                 detector_name=' '.join(i.upper() for i in self.strategy.split('-')),
                 detected_prices_with_timestamps='\n\t' + '\n\t'.join(F'{str(t)} : {str(p)}' for t, p in zip(self.timestamps, self.prices))
@@ -53,7 +53,13 @@ class DetectionResponse:
     def __repr__(self):
         return F"DetectionResponse({self.rb} ,{self.strategy})"
 
-    def save(self, path):
+    def save_txt(self, path):
         file = open(path, "a")
         file.write('\n' + self.message)
         file.close()
+
+
+def save_response_to_txt(response, path):
+    file = open(path, "a")
+    file.write('\n' + response.message)
+    file.close()

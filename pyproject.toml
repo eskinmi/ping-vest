@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ping-vest"
+version = "0.1.0"
+description = "PingVest is an application for users who would like to get notified about the stocks and forex that they have interest in"
+authors = ["mEskintoch <mustafasamedeskin@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "ping_vest"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = "^1.22.1"
+pandas = "^1.4.0"
+requests = "^2.27.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

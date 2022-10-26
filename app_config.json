@@ -101,7 +101,7 @@
       "asset_type" : "stock-intraday",
       "asset_params": {"interval":  "30min"},
       "params" : {
-        "target" : 53.0,
+        "target" : 51.0,
         "detect_higher" : false,
         "max_lookback_units" : 25
       }
@@ -113,7 +113,7 @@
       "asset_type" : "stock-intraday",
       "asset_params": {"interval":  "30min"},
       "params" : {
-        "target" : 42.0,
+        "target" : 40.0,
         "detect_higher" : false,
         "max_lookback_units" : 25
       }
@@ -137,7 +137,7 @@
       "asset_type" : "stock-intraday",
       "asset_params": {"interval":  "30min"},
       "params" : {
-        "target" : 47.0,
+        "target" : 50.0,
         "detect_higher" : true,
         "max_lookback_units" : 25
       }

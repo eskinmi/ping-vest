@@ -4,6 +4,7 @@ from logging.handlers import RotatingFileHandler
 from pingvest.utils import read_json
 from pingvest.api.assets import AssetLoader
 from pingvest.detection.detector import Detector
+from pingvest.detection.response import save_response_to_txt
 
 
 def _set_logger():
@@ -23,7 +24,11 @@ def _clean_output_content(path):
     f.close()
 
 
-def run_pipeline(configs, out_path: str, include_negative_responses: bool = False):
+def run_pipe(configs,
+             out_path: str,
+             include_negative_responses: bool = False,
+             notify: bool = False
+             ):
     asset_loader = AssetLoader()
     for config in configs:
         for strategy, run_configs in config.items():
@@ -46,7 +51,12 @@ def run_pipeline(configs, out_path: str, include_negative_responses: bool = Fals
             )
 
             if include_negative_responses or response.rb:
-                response.save(out_path)
+                save_response_to_txt(
+                    response,
+                    out_path
+                )
+                if notify:
+                    pass
 
 
 if __name__ == "__main__":
@@ -58,4 +68,4 @@ if __name__ == "__main__":
     _clean_output_content(save_path)
 
     run_configurations = read_json(conf_path)
-    run_pipeline(run_configurations, save_path)
+    run_pipe(run_configurations, save_path)
