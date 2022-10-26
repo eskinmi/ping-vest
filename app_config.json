@@ -1,0 +1,146 @@
+[
+  {
+    "price_hit_detector" : {
+      "asset" :  "AAPL",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "target" : 160.0,
+        "detect_higher" : true,
+        "max_lookback_units" : 25
+      }
+    }
+  },
+  {
+    "price_hit_detector" : {
+      "asset" :  "AAPL",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "target" : 140.0,
+        "detect_higher" : false,
+        "max_lookback_units" : 25
+      }
+    }
+  },
+  {
+    "naive_anomaly_detector" : {
+      "asset" :  "AAPL",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "abs_limit" : 3.5
+      }
+    }
+  },
+  {
+    "naive_anomaly_detector" : {
+      "asset" :  "ASML",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "abs_limit" : 3.5
+      }
+    }
+  },
+  {
+    "naive_anomaly_detector" : {
+      "asset" :  "TSLA",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "abs_limit" : 3.5
+      }
+    }
+  },
+  {
+    "dip_detector" : {
+      "asset" :  "TSLA",
+      "asset_type" : "stock-daily",
+      "params" : {}
+    }
+  },
+  {
+    "dip_detector" : {
+      "asset" :  "AAPL",
+      "asset_type" : "stock-daily",
+      "params" : {}
+    }
+  },
+  {
+    "dip_detector" : {
+      "asset" :  "ASML",
+      "asset_type" : "stock-daily",
+      "params" : {}
+    }
+  },
+  {
+    "dip_detector" : {
+      "asset" :  "GOOGL",
+      "asset_type" : "stock-daily",
+      "params" : {}
+    }
+  },
+  {
+    "dip_detector" : {
+      "asset" :  "CRSP",
+      "asset_type" : "stock-daily",
+      "params" : {}
+    }
+  },
+  {
+    "dip_detector" : {
+      "asset" :  "BEAM",
+      "asset_type" : "stock-daily",
+      "params" : {}
+    }
+  },
+  {
+    "price_hit_detector" : {
+      "asset" :  "CRSP",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "target" : 53.0,
+        "detect_higher" : false,
+        "max_lookback_units" : 25
+      }
+    }
+  },
+  {
+    "price_hit_detector" : {
+      "asset" :  "BEAM",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "target" : 42.0,
+        "detect_higher" : false,
+        "max_lookback_units" : 25
+      }
+    }
+  },
+  {
+    "price_hit_detector" : {
+      "asset" :  "CRSP",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "target" : 56.0,
+        "detect_higher" : true,
+        "max_lookback_units" : 25
+      }
+    }
+  },
+  {
+    "price_hit_detector" : {
+      "asset" :  "BEAM",
+      "asset_type" : "stock-intraday",
+      "asset_params": {"interval":  "30min"},
+      "params" : {
+        "target" : 47.0,
+        "detect_higher" : true,
+        "max_lookback_units" : 25
+      }
+    }
+  }
+]

@@ -133,3 +133,11 @@ dmypy.json
 
 # apikey
 .apikey.txt
+
+# output files
+.out.json
+.responses.txt
+
+# log files
+.logs.txt
+
