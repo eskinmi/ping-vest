@@ -10,7 +10,7 @@ def dip_detector(data: np.array,
                  ):
     data_ma = stats.ma(data, w)
     data_scaled = stats.min_max_scale(data_ma)
-    if data_scaled[0] <= quant:
+    if any(data_scaled[:3] <= quant):
         return (
             True,
             data[:w].tolist(),
@@ -27,7 +27,7 @@ def peak_detector(data: np.array,
                   ):
     data_ma = stats.ma(data, w)
     data_scaled = stats.min_max_scale(data_ma)
-    if data_scaled[0] <= quant:
+    if any(data_scaled[:w] >= 1 - quant):
         return (
             True,
             data[:w].tolist(),

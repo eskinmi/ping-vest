@@ -12,7 +12,7 @@ def naive_anomaly_detector(data: np.array,
         stats.fod(data)
     )
     # find outliers
-    outliers = stats.outliers(data_stand, abs_limit)
+    outliers = stats.ix_outliers(data_stand, abs_limit)
     return (
         any(outliers),
         np.take(data, outliers).tolist(),
