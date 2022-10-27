@@ -51,7 +51,7 @@ def run_pipe(configs,
             response = detector.detect(
                 asset.data,
                 asset.data_keys,
-                run_configs['params']
+                **run_configs['params']
             )
 
             if include_negative_responses or response.rb:
@@ -102,3 +102,6 @@ def run_tests(ctx):
 if __name__ == "__main__":
     logger = _set_logger()
     cli(obj={})
+
+
+

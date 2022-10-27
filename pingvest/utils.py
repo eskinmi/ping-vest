@@ -22,7 +22,7 @@ def make_get_request_to_json(url, params):
         r.raise_for_status()
 
 
-def make_request_to_csv(url, params):
+def make_get_request_to_csv(url, params):
     logger.debug('requesting csv from alpha vantage api.')
     r = requests.get(url, params)
     logger.debug(F'request status code: {r.status_code}')

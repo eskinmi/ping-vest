@@ -19,9 +19,28 @@ There are two main assets; forex and stock. In order to run the app one can take
 * install poetry: `pip install poetry` 
 * install dependencies: `poetry install`
 
-To run the app:
-
 #### Terminal:
+
+##### Tests
+
+```cli
+python app.py run-tests
+```
+
+or 
+
+```cli
+coverage run -m pytest
+```
+
+To check the test coverage, run: 
+
+```cli
+coverage report -m
+```
+
+
+##### Application 
 
 Running with given configurations in `app_config.json`: 
 

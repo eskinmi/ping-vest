@@ -23,7 +23,7 @@ def fod(x) -> np.array:
     return np.diff(x, 1)
 
 
-def outliers(x: np.array, abs_limit: Union[float, int]) -> List[int]:
+def ix_outliers(x: np.array, abs_limit: Union[float, int]) -> List[int]:
     """ detect outliers """
     return list(
         np.where(np.abs(x) >= abs_limit)[0]

@@ -9,7 +9,7 @@ import json
 import logging
 
 from pingvest.utils import get_api_key
-from pingvest.utils import make_request_to_csv
+from pingvest.utils import make_get_request_to_csv
 from pingvest.utils import make_get_request_to_json
 
 
@@ -61,7 +61,7 @@ class AssetCollector(ABC):
                 self.params
             )
         elif self.parse_type == 'csv':
-            raw_data = make_request_to_csv(
+            raw_data = make_get_request_to_csv(
                 self.api_path,
                 self.params
             )
@@ -129,7 +129,7 @@ class StockExchangeIntraDay(AssetCollector):
             np.array
         """
         key = self._get_data_key(raw)
-        raw = _data_to_numpy(raw, key)
+        raw = asset_data_to_numpy(raw, key)
         return raw
 
 
@@ -161,7 +161,7 @@ class StockExchangeDaily(AssetCollector):
             np.array
         """
         key = self._get_data_key(raw)
-        raw = _data_to_numpy(raw, key)
+        raw = asset_data_to_numpy(raw, key)
         return raw
 
 
@@ -252,7 +252,7 @@ class ForeignExchangeIntraDay(AssetCollector):
             np.array
         """
         key = self._get_data_key(raw)
-        raw = _data_to_numpy(raw, key)
+        raw = asset_data_to_numpy(raw, key)
         return raw
 
 
@@ -260,7 +260,7 @@ def interval_str_to_int(interval):
     return int(interval.replace('min', ''))
 
 
-def _data_to_numpy(data, key):
+def asset_data_to_numpy(data, key):
     logger.debug('processing raw data to numpy array.')
     return np.array(
         [v.get('4. close', 0) for k, v in data[key].items()],
@@ -271,7 +271,7 @@ def _data_to_numpy(data, key):
 def make_asset(asset_name, **asset_params):
     valid_names = ['stock-intraday', 'forex-intraday', 'stock-daily']
     if asset_name not in valid_names:
-        ValueError(F'asset should be one of the following; {valid_names}')
+        raise ValueError(F'asset should be one of the following; {valid_names}')
     else:
         if asset_name == 'stock-intraday':
             return StockExchangeIntraDay(**asset_params)

@@ -10,7 +10,7 @@ class Detector:
         self.name = name
         self.method = getattr(dts, name)
 
-    def detect(self, data: np.array, timestamps: np.array, params: dict):
+    def detect(self, data: np.array, timestamps: np.array, **params):
         rb, prices, times = self.method(data, timestamps, **params)
         return DetectionResponse(sym=self.sym,
                                  strategy=self.name,
