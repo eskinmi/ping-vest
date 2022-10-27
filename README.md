@@ -26,7 +26,13 @@ To run the app:
 Running with given configurations in `app_config.json`: 
 
 ```cli
-python app.py 
+python app.py run 
+```
+
+debug mode:
+
+```cli
+python app.py --debug run 
 ```
 
 Or if you haven't installed the dependencies yet:
